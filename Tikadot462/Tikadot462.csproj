@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net462</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IKVM" Version="8.2.0-prerelease1515" />
+  </ItemGroup>
+	
+  <!-- Auto increment version Number on Build-->
+  <PropertyGroup>
+	  <MajorBuild>$([System.DateTime]::Now.Subtract($([System.Convert]::ToDateTime("01/01/2000"))).Days)</MajorBuild>
+	  <MinorBuild>$([System.Convert]::ToInt32($([MSBuild]::Divide($([System.DateTime]::Now.Subtract($([System.DateTime]::Today)).TotalSeconds), 2))))</MinorBuild>
+	  <Version>1.0.$(MajorBuild).$(MinorBuild)</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<IkvmReference Include="..\Tika\tika-app-*.jar">
+      <AssemblyName>tika-app</AssemblyName>
+	</IkvmReference>
+  </ItemGroup>
+	
+</Project>
